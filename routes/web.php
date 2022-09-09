@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/', 'IndexController')->name('index');
 
 Route::get('/catalog/index', 'CatalogController@index')->name('catalog.index');
 Route::get('/catalog/category/{slug}', 'CatalogController@category')->name('catalog.category');

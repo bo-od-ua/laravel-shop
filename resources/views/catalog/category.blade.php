@@ -2,11 +2,9 @@
 
 @section('content')
 <h1>Категория {{$category->name}}</h1>
-<ul>
-    @foreach($products as $product)
-        <li>
-            <a href="{{route('catalog.product', ['slug'=> $product->slug])}}">{{$product->name}}</a>
-        </li>
+<div class="row">
+    @foreach ($products as $product)
+        @include('catalog.patrial.product', ['product' => $product])
     @endforeach
-</ul>
+</div>
 @endsection
