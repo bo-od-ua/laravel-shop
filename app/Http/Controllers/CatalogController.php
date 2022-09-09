@@ -17,24 +17,19 @@ class CatalogController extends Controller
     public function category($slug)
     {
         $category= Category::where('slug', $slug)->firstOrFail();
-        $products= $category->getProducts();
-        return view('catalog.category', compact('category','products'));
+        return view('catalog.category', compact('category'));
     }
 
     public function brand($slug)
     {
         $brand= Brand::where('slug', $slug)->firstOrFail();
-        $products= $brand->getProducts();
-        return view('catalog.brand', compact('brand','products'));
+        return view('catalog.brand', compact('brand'));
     }
 
     public function product($slug)
     {
         $product= Product::where('slug', $slug)->firstOrFail();
 
-        $category= $product->getCategory();
-        $brand= $product->getBrand();
-
-        return view('catalog.product', compact('category', 'brand', 'product'));
+        return view('catalog.product', compact('product'));
     }
 }
