@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Basket;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Cookie;
 
 class BasketController extends Controller
 {
-    public function index(Request $request){
-        $products= [];
-        $basket_id= $request->cookie('basket_id');
+    private $basket;
 
-        if(!empty($basket_id)){
-            $products= Basket::findOrFail($basket_id)->products;
-        }
+    public function __construct()
+    {
+        $this->getBasket();
+    }
+
+    public function index(){
+        $products= $this->basket->products;
 
         return view('basket.index', compact('products'));
     }
@@ -23,28 +27,47 @@ class BasketController extends Controller
     }
 
     public function add(Request $request, $id){
-        $basket_id= $request->cookie('basket_id');
         $quantity= $request->input('quantity') ?? 1;
+        $this->basket->increase($id, $quantity);
 
-        if(empty($basket_id)){
-            $basket= Basket::create();
-            $basket_id= $basket->id;
-        }
-        else{
-            $basket= Basket::findOrFail($basket_id);
-            $basket->touch();
-        }
+        return back();
+    }
 
-        if($basket->products->contains($id)){
-            $basket->products()->udateExistingPivot(
-                $id,
-                ['quantity', $quantity]
-            );
-        }
-        else{
-            $basket->products()->attach($id, ['quantity'=> $quantity]);
-        }
+    public function plus($id){
+        $this->basket->increase($id);
 
-        return back()->withCookie(cookie('basket_id', $basket_id, 525600));
+        return redirect()->route('basket.index');
+    }
+
+    public function minus($id){
+        $this->basket->decrease($id);
+
+        return redirect()->route('basket.index');
+    }
+
+    private function getBasket(){
+        $basket_id= request()->cookie('basket_id');
+        if(!empty($basket_id)) {
+            try {
+                $this->basket = Basket::findOrFail($basket_id);
+            } catch (ModelNotFoundException $e) {
+                $this->basket = Basket::create();
+            }
+        }else{
+            $this->basket = Basket::create();
+        }
+        Cookie::queue('basket_id', $this->basket->id, 525600);
+    }
+
+    public function remove($id){
+        $this->basket->remove($id);
+
+        return redirect()->route('basket.index');
+    }
+
+    public function clear(){
+        $this->basket->delete();
+
+        return redirect()->route('basket.index');
     }
 }

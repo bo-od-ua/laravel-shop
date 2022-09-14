@@ -29,3 +29,13 @@ Route::get('/basket/checkout', 'BasketController@checkout')->name('basket.checko
 Route::post('/basket/add/{id}', 'BasketController@add')
     ->where('id', '[0-9]+')
     ->name('basket.add');
+Route::post('/basket/plus/{id}', 'BasketController@plus')
+    ->where('id', '[0-9]+')
+    ->name('basket.plus');
+Route::post('/basket/minus/{id}', 'BasketController@minus')
+    ->where('id', '[0-9]+')
+    ->name('basket.minus');
+Route::post('/basket/remove/{id}', 'BasketController@remove')
+    ->where('id', '[0-9]+')
+    ->name('basket.remove');
+Route::post('/basket/clear', 'BasketController@clear')->name('basket.clear');
