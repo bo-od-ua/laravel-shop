@@ -9,7 +9,8 @@ class Category extends Model
     public function products(){
         return $this->hasMany(Product::class);
     }
-//    public function getProducts(){
-//        return Product::where('category_id', $this->id)->get();
-//    }
+
+    public static function roots(){
+        return self::where('parent_id', 0)->get();
+    }
 }

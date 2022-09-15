@@ -53,10 +53,8 @@
 
     <div class="row">
         <div class="col-md-3">
-            <h4>Разделы каталога</h4>
-            <p>Здесь будут корневые разделы</p>
-            <h4>Популярные бренды</h4>
-            <p>Здесь будут популярные бренды</p>
+            @include('layout.patrial.roots')
+            @include('layout.patrial.brands')
         </div>
         <div class="col-md-9">
             @yield('content')
