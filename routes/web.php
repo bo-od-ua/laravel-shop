@@ -39,3 +39,19 @@ Route::post('/basket/remove/{id}', 'BasketController@remove')
     ->where('id', '[0-9]+')
     ->name('basket.remove');
 Route::post('/basket/clear', 'BasketController@clear')->name('basket.clear');
+
+Route::name('user.')->prefix('user')->group(function(){
+    Auth::routes();
+});
+
+Route::group([
+    'as'=> 'user.',
+    'prefix'=> 'user',
+    'middleware'=> ['auth']
+], function (){
+    Route::get('index', 'UserController@index')->name('index');
+    Route::resource('profile', 'ProfileController');
+    Route::get('order', 'OrderController@index')->name('order.index');
+    Route::get('order/{order}', 'OrderController@show')->name('order.show');
+});
+//Route::get('/home', 'HomeController@index')->name('home');
