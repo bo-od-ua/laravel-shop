@@ -41,8 +41,15 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        return redirect()->route('user.index')
-            ->with('success', 'Вы успешно вошли в личный кабинет');
+        $route= 'user.index';
+        $message= 'Вы успешно вошли в личный кабинет';
+
+        if($user->admin){
+            $route= 'admin.index';
+            $message= 'Вы успешно вошли в панель управления';
+        }
+
+        return redirect()->route($route)->with('success', $message);
     }
 
     protected function loggedOut(Request $request)

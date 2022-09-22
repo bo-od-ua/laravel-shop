@@ -54,4 +54,13 @@ Route::group([
     Route::get('order', 'OrderController@index')->name('order.index');
     Route::get('order/{order}', 'OrderController@show')->name('order.show');
 });
+
+Route::group([
+    'as'=> 'admin.',
+    'prefix'=> 'admin',
+    'namespace'=> 'Admin',
+    'middleware'=> ['auth', 'admin']
+], function (){
+    Route::get('index', 'IndexController')->name('index');
+});
 //Route::get('/home', 'HomeController@index')->name('home');
