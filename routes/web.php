@@ -39,6 +39,8 @@ Route::post('/basket/remove/{id}', 'BasketController@remove')
     ->where('id', '[0-9]+')
     ->name('basket.remove');
 Route::post('/basket/clear', 'BasketController@clear')->name('basket.clear');
+Route::post('/basket/saveorder', 'BasketController@saveOrder')->name('basket.saveorder');
+Route::get('/basket/success', 'BasketController@success')->name('basket.success');
 
 Route::name('user.')->prefix('user')->group(function(){
     Auth::routes();

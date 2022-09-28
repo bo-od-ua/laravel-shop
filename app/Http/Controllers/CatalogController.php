@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Product;
-use App\Brand;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller

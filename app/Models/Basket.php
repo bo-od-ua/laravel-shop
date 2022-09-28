@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +37,16 @@ class Basket extends Model
         }
 
         return self::find($basket_id)->products->count();
+    }
+
+    public function getAmount()
+    {
+        $amount= 0.0;
+        foreach($this->products as $product){
+            $amount= $amount+ $product->price* $product->pivot->quantity;
+        }
+
+        return $amount;
     }
 
     public function increase($id, $count= 1)
