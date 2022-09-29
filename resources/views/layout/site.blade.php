@@ -70,8 +70,8 @@
 
     <div class="row">
         <div class="col-md-3">
-            @include('layout.patrial.roots')
-            @include('layout.patrial.brands')
+            @include('layout.part.roots')
+            @include('layout.part.brands')
         </div>
         <div class="col-md-9">
             @if($message= Session::get('success'))

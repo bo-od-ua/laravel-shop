@@ -26,6 +26,7 @@ Route::get('/catalog/product/{slug}', 'CatalogController@product')->name('catalo
 
 Route::get('/basket/index', 'BasketController@index')->name('basket.index');
 Route::get('/basket/checkout', 'BasketController@checkout')->name('basket.checkout');
+Route::get('/basket/success', 'BasketController@success')->name('basket.success');
 Route::post('/basket/add/{id}', 'BasketController@add')
     ->where('id', '[0-9]+')
     ->name('basket.add');
@@ -40,7 +41,6 @@ Route::post('/basket/remove/{id}', 'BasketController@remove')
     ->name('basket.remove');
 Route::post('/basket/clear', 'BasketController@clear')->name('basket.clear');
 Route::post('/basket/saveorder', 'BasketController@saveOrder')->name('basket.saveorder');
-Route::get('/basket/success', 'BasketController@success')->name('basket.success');
 
 Route::name('user.')->prefix('user')->group(function(){
     Auth::routes();
@@ -52,9 +52,9 @@ Route::group([
     'middleware'=> ['auth']
 ], function (){
     Route::get('index', 'UserController@index')->name('index');
-    Route::resource('profile', 'ProfileController');
-    Route::get('order', 'OrderController@index')->name('order.index');
-    Route::get('order/{order}', 'OrderController@show')->name('order.show');
+//    Route::resource('profile', 'ProfileController');
+//    Route::get('order', 'OrderController@index')->name('order.index');
+//    Route::get('order/{order}', 'OrderController@show')->name('order.show');
 });
 
 Route::group([
@@ -64,5 +64,6 @@ Route::group([
     'middleware'=> ['auth', 'admin']
 ], function (){
     Route::get('index', 'IndexController')->name('index');
+    Route::resource('category', 'CategoryController');
 });
 //Route::get('/home', 'HomeController@index')->name('home');

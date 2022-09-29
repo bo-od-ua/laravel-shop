@@ -6,7 +6,7 @@
 
 <div class="row">
     @foreach ($brand->products as $product)
-        @include('catalog.patrial.product', ['product' => $product])
+        @include('catalog.part.product', ['product' => $product])
     @endforeach
 </div>
 @endsection

@@ -11,7 +11,7 @@
 <h2>Разделы каталога</h2>
 <div class="row">
     @foreach ($roots as $root)
-        @include('catalog.patrial.category', ['category' => $root])
+        @include('catalog.part.category', ['category' => $root])
     @endforeach
 </div>
 @endsection
