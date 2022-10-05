@@ -45,19 +45,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'parent_id'=> 'integer',
-            'name'=>      'required|max:100',
-            'slug'=>      'required|max:100|unique:categories,slug|regex:~^[-_a-z0-9]+$~i',
-            'image'=>     'mimes:jpeg,jpg,png|max:5000',
-        ]);
-
         $data= $request->all();
         $data['image']= $this->imageServer->upload($request, null, 'category');
 
         $category= Category::create($data);
         return redirect()
-            ->route('admin.category.show', ['category', $category->id])
+            ->route('admin.category.show', ['category'=> $category->id])
             ->with('success', 'Новая категория создана');
     }
 
@@ -93,21 +86,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $id= $category->id;
-        $this->validate($request, [
-            'parent_id'=> 'integer',
-            'name'=>      'required|max:100',
-            'slug'=>      'required|max:100|unique:categories,slug,'.$id.',id|regex:~^[-_a-z0-9]+$~i',
-            'image'=>      'mimes:jpeg,jpg,png|max:5000'
-        ]);
-
         $data= $request->all();
         $data['image']= $this->imageServer->upload($request, null, 'category');
 
         $category->update($data);
 
         return redirect()
-            ->route('admin.category.show', ['category', $category->id])
+            ->route('admin.category.show', ['category'=> $category->id])
             ->with('success', 'Категория успешно обновлена');
     }
 
