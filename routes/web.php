@@ -65,5 +65,6 @@ Route::group([
 ], function (){
     Route::get('index', 'IndexController')->name('index');
     Route::resource('category', 'CategoryController');
+    Route::resource('brand', 'BrandController');
 });
 //Route::get('/home', 'HomeController@index')->name('home');

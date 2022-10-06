@@ -19,7 +19,7 @@
                     $url= Storage::disk('public')->url('catalog/category/image/'.$category->image);
                 }
                 else{
-                    $url= Storage::disk('public')->url('catalog/category/image/def.jpg');
+                    $url= Storage::disk('public')->url('catalog/def.jpg');
                 }
             @endphp
             <img src="{{$url}}" alt="" class="img-fluid">
