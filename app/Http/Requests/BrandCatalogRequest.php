@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\CategoryParent;
 
-class CategoryCatalogRequest extends CatalogRequest
+class BrandCatalogRequest extends CatalogRequest
 {
     protected $entity= [
         'name'=>  'category',
         'table'=> 'categories',
     ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,12 +32,7 @@ class CategoryCatalogRequest extends CatalogRequest
 
     public function createItem()
     {
-        $rules= [
-            'parent_id'=> [
-                'required',
-                'regex:~^[0-9]+$~',
-            ],
-        ];
+        $rules= [];
 
         return array_merge(parent::createItem(), $rules);
     }
@@ -45,13 +40,7 @@ class CategoryCatalogRequest extends CatalogRequest
     public function updateItem()
     {
         $model= $this->route('category');
-        $rules= [
-            'parent_id'=> [
-                'required',
-                'regex:~^[0-9]+$~',
-                new CategoryParent($model)
-            ],
-        ];
+        $rules= [];
 
         return array_merge(parent::updateItem(), $rules);
     }
