@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.admin', ['title' => 'Создание категории'])
 
 @section('content')
     <h1>Создание новой категории</h1>

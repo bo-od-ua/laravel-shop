@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\ImageSaver;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryCatalogRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -43,7 +43,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryCatalogRequest $request)
     {
         $data= $request->all();
         $data['image']= $this->imageServer->upload($request, null, 'category');
@@ -84,7 +84,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryCatalogRequest $request, Category $category)
     {
         $data= $request->all();
         $data['image']= $this->imageServer->upload($request, null, 'category');

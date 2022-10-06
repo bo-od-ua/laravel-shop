@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
+
+    <title>{{ $title ?? 'Панель управления' }}</title>
 </head>
 <body>
 <div class="container">
@@ -68,6 +70,20 @@
                     {{ $message }}
                 </div>
             @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             @yield('content')
         </div>
     </div>

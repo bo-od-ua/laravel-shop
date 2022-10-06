@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.admin', ['title' => 'Все категории каталога'])
 
 @section('content')
     <h1>Все категории</h1>

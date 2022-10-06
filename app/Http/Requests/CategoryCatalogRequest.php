@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\CategoryParent;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryCatalogRequest extends FormRequest
@@ -36,7 +37,7 @@ class CategoryCatalogRequest extends FormRequest
                 $model= $this->route('category');
                 $id= $model->id;
                 return[
-                    'parent_id'=> 'integer',
+                    'parent_id'=> ['required', 'regex:~^[0-9]+$~', new CategoryParent($model)],
                     'name'=>      'required|max:100',
                     'slug'=>      'required|max:100|unique:categories,slug,'.$id.',id|regex:~^[-_a-z0-9]+$~i',
                     'image'=>      'mimes:jpeg,jpg,png|max:5000'

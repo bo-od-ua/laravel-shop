@@ -24,4 +24,28 @@ class Category extends Model
     public static function roots(){
         return self::where('parent_id', 0)->with('children')->get();
     }
+
+    public function validParent($id){
+        $id= (int)$id;
+
+        $ids= $this->getAllChildren($this->id);
+        $ids[]= $this->id;
+
+        return ! in_array($id, $ids);
+    }
+
+    public function getAllChildren($id){
+        $children= self::where('parent_id', $id)->with('children')->get();
+        $ids= [];
+
+        foreach ($children as $child){
+            $ids[]= $child->id;
+
+            if($child->children->count()){
+                $ids= array_merge($ids, $this->getAllChildren($child->id));
+            }
+        }
+
+        return $ids;
+    }
 }
