@@ -48,4 +48,12 @@ class Category extends Model
 
         return $ids;
     }
+
+    public function descendants(){
+        return $this->hasMany(Category::class, 'parent_id')->with('descendants');
+    }
+
+    public function hierarchy(){
+        return self::where('parent_id', 0)->with('descendants')->get();
+    }
 }

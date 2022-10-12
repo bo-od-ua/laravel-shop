@@ -1,4 +1,3 @@
-<?php
 @extends('layout.admin', ['title' => 'Редактирование бренда'])
 
 @section('content')

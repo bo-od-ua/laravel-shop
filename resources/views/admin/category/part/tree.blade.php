@@ -2,7 +2,7 @@
     @php
         $level++;
     @endphp
-    @foreach($items as $item)
+    @foreach($items->where('parent_id', $parent) as $item)
         <tr>
             <td>
                 @if($level)
@@ -26,8 +26,8 @@
                 </form>
             </td>
         </tr>
-        @if($item->children->count())
-            @include('admin.category.part.tree', ['items'=> $item->children, 'level'=> $level])
+        @if(count($items->where('parent_id', $parent)))
+            @include('admin.category.part.tree', ['parent'=> $item->id, 'level'=> $level])
         @endif
     @endforeach
 @endif

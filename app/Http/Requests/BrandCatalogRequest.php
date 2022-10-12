@@ -39,7 +39,6 @@ class BrandCatalogRequest extends CatalogRequest
 
     public function updateItem()
     {
-        $model= $this->route('category');
         $rules= [];
 
         return array_merge(parent::updateItem(), $rules);

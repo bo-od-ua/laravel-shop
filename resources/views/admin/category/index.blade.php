@@ -2,6 +2,7 @@
 
 @section('content')
     <h1>Все категории</h1>
+    <a href="{{route('admin.category.create')}}" class="btn btn-success mb-4">Создать категорию</a>
     <table class="table table-bordered">
         <tr>
             <th width="30%">Наименование</th>
@@ -9,6 +10,6 @@
             <th><i class="fas fa-edit"></i></th>
             <th><i class="fas fa-trash"></i></th>
         </tr>
-        @include('admin.category.part.tree', ['items'=> $roots, 'level'=> -1])
+        @include('admin.category.part.tree', ['level'=> -1, 'parent'=> 0])
     </table>
 @endsection
