@@ -13,7 +13,7 @@ class Product extends Model
         'slug',
         'content',
         'image',
-        'sale',
+        'price',
     ];
     public function category(){
         return $this->belongsTo(Category::class);

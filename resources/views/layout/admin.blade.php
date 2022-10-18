@@ -31,10 +31,10 @@
             <!-- Этот блок расположен слева -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Заказы</a>
+                    <a class="nav-link" href="{{ route('admin.order.index') }}">Заказы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Каталог</a>
+                    <a class="nav-link" href="#">Пользователи</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.category.index') }}">Категории</a>
