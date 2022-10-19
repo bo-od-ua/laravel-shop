@@ -69,5 +69,6 @@ Route::group([
     Route::resource('product', 'ProductController');
     Route::get('product/category/{category}', 'ProductController@category')->name('product.category');
     Route::resource('order', 'OrderController', ['except'=> ['create', 'store', 'destroy']]);
+    Route::resource('user', 'UserController', ['except'=> ['create', 'store', 'show', 'destroy']]);
 });
 //Route::get('/home', 'HomeController@index')->name('home');

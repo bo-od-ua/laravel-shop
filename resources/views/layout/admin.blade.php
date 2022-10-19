@@ -34,7 +34,7 @@
                     <a class="nav-link" href="{{ route('admin.order.index') }}">Заказы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Пользователи</a>
+                    <a class="nav-link" href="{{ route('admin.user.index') }}">Пользователи</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.category.index') }}">Категории</a>

@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Support\Carbon;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class User extends Authenticatable
 {
@@ -47,5 +49,23 @@ class User extends Authenticatable
             ]));
         });
         $this->notify($notification);
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->timezone('Europe/Moscow');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->timezone('Europe/Moscow');
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
+
+    public function profiles(){
+        return $this->hasMany(Profile::class);
     }
 }
