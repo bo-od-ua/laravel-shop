@@ -70,5 +70,12 @@ Route::group([
     Route::get('product/category/{category}', 'ProductController@category')->name('product.category');
     Route::resource('order', 'OrderController', ['except'=> ['create', 'store', 'destroy']]);
     Route::resource('user', 'UserController', ['except'=> ['create', 'store', 'show', 'destroy']]);
+    Route::resource('page', 'PageController');
+
+    Route::post('page/upload/image', 'PageController@uploadImage')
+        ->name('page.upload.image');
+    Route::post('page/remove/image', 'PageController@removeImage')
+        ->name('page.remove.image');
 });
+
 //Route::get('/home', 'HomeController@index')->name('home');
