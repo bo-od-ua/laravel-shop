@@ -1,4 +1,4 @@
-@extends('layout.site')
+@extends('layout.site', ['title' => 'Вход в личный кабинет'])
 
 @section('content')
 

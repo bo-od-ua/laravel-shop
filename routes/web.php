@@ -42,6 +42,8 @@ Route::post('/basket/remove/{id}', 'BasketController@remove')
 Route::post('/basket/clear', 'BasketController@clear')->name('basket.clear');
 Route::post('/basket/saveorder', 'BasketController@saveOrder')->name('basket.saveorder');
 
+Route::get('page/{page:slug}', 'PageController')->name('page.show');
+
 Route::name('user.')->prefix('user')->group(function(){
     Auth::routes();
 });

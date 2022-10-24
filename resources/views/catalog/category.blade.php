@@ -1,4 +1,4 @@
-@extends('layout.site')
+@extends('layout.site', ['title' => $category->name])
 
 @section('content')
 <h1>Категория {{$category->name}}</h1>

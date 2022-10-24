@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Магазин</title>
+    <title>{{ $title ?? 'Интернет-магазин' }}</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
           crossorigin="anonymous"/>
@@ -30,12 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('catalog.index')}}">Каталог</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Доставка</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Контакты</a>
-                </li>
+                @include('layout.part.pages')
             </ul>
             <!-- Этот блок расположен справа -->
             <form class="form-inline my-2 my-lg-0">

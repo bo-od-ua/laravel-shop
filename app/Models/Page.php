@@ -20,4 +20,13 @@ class Page extends Model
     public function parent(){
         return $this->belongsTo(Page::class);
     }
+
+    public function getRouteKeyName(): string // 577
+    {
+        $current= \Route::currentRouteName();
+        if('page.show'== $current){
+            return 'slug';
+        }
+        return 'id';
+    }
 }

@@ -1,4 +1,4 @@
-@extends('layout.site')
+@extends('layout.site', ['title' => 'Регистрация на сайте'])
 
 @section('content')
 <div class="row">

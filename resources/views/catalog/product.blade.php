@@ -1,4 +1,4 @@
-@extends('layout.site')
+@extends('layout.site', ['title' => $product->name])
 
 @section('content')
     <div class="row">
