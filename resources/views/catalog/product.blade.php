@@ -16,7 +16,7 @@
                         <div class="col-md-6">
                             <p>Цена: {{ number_format($product->price, 2, '.', '') }}</p>
                             <form action="{{ route('basket.add', ['id' => $product->id]) }}"
-                                  method="post" class="form-inline">
+                                  method="post" class="form-inline add-to-basket">
                                 @csrf
                                 <label for="input-quantity">Количество</label>
                                 <input type="text" name="quantity" id="input-quantity" value="1"
@@ -35,6 +35,18 @@
                     <div class="row">
                         <div class="col-md-6">
                             Категория:
+                            <a href="{{ route('catalog.category', [$product->category->slug]) }}">
+                                {{ $product->category->name }}
+                            </a>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            Бренд:
+                            <a href="{{ route('catalog.brand', [$product->brand->slug]) }}">
+                                {{ $product->brand->name }}
+                            </a>
+                        </div>
+{{--                        <div class="col-md-6">
+                            Категория:
                             <a href="{{ route('catalog.category', ['slug' => $product->category->slug]) }}">
                                 {{ $product->category->name }}
                             </a>
@@ -44,7 +56,7 @@
                             <a href="{{ route('catalog.brand', ['slug' => $product->brand->slug]) }}">
                                 {{ $product->brand->name }}
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/main.js?r=0') }}"></script>
 </head>
 <body>
 <div class="container">
@@ -41,7 +41,7 @@
                         type="submit">Искать</button>
             </form>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li id="top-basket" class="nav-item">
                     <a class="nav-link @if($positions) text-success @endif" href="{{ route('basket.index') }}">
                         Корзина @if ($positions) ({{ $positions }}) @endif
                     </a>

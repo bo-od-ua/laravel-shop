@@ -49,4 +49,27 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+    $('form.add-to-basket').submit(function (e) {
+        e.preventDefault();
+
+        var $form = $(this);
+        var data = new FormData($form[0]);
+        $.ajax({
+            url: $form.attr('action'),
+            data: data,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            dataType: 'HTML',
+            beforeSend: function () {
+                var spinner = ' <span class="spinner-border spinner-border-sm"></span>';
+                $form.find('button').append(spinner);
+            },
+            success: function(html) {
+                $form.find('.spinner-border').remove();
+                $('#top-basket').html(html);
+            }
+        });
+    });
 });

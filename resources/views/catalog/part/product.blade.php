@@ -1,19 +1,25 @@
-<div class="col-md-6 mb-4">
-    <div class="card">
+<div class="col-md-4 mb-4">
+    <div class="card list-item">
         <div class="card-header">
-            <h4>{{ $product->name }}</h4>
+            <h3 class="mb-0">{{ $product->name }}</h3>
         </div>
         <div class="card-body p-0">
-            <img src="https://via.placeholder.com/400x120" alt="" class="img-fluid">
+            @if ($product->image)
+                @php($url = url('storage/catalog/product/thumb/' . $product->image))
+                <img src="{{ $url }}" class="img-fluid" alt="">
+            @else
+                <img src="https://via.placeholder.com/300x150" class="img-fluid" alt="">
+            @endif
         </div>
         <div class="card-footer">
+            <!-- Форма для добавления товара в корзину -->
             <form action="{{ route('basket.add', ['id' => $product->id]) }}"
-                  method="post" class="d-inline">
+                  method="post" class="d-inline add-to-basket">
                 @csrf
-                <button type="submit" class="btn btn-success">Добавить в корзину</button>
+                <button type="submit" class="btn btn-success">В корзину</button>
             </form>
-            <a href="{{ route('catalog.product', ['slug' => $product->slug]) }}"
-               class="btn btn-dark">Перейти к товару</a>
+            <a href="{{ route('catalog.product', ['product' => $product->slug]) }}"
+               class="btn btn-dark float-right">Смотреть</a>
         </div>
     </div>
 </div>

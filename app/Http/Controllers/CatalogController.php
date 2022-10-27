@@ -11,25 +11,46 @@ class CatalogController extends Controller
 {
     public function index(){
         $roots= Category::where('parent_id', 0)->get();
-        return view('catalog.index', compact('roots'));
+        $brands= Brand::popular();
+        return view('catalog.index', compact('roots', 'brands'));
     }
 
-    public function category($slug)
+    public function category(Category $category)
     {
-        $category= Category::where('slug', $slug)->firstOrFail();
-        return view('catalog.category', compact('category'));
+        $descendants= $category->getAllChildren($category->id);
+        $descendants[]= $category->id;
+
+        $products= Product::whereIn('category_id', $descendants)->paginate(6);
+
+        return view('catalog.category', compact('category', 'products'));
     }
 
-    public function brand($slug)
+    public function brand(Brand $brand)
     {
-        $brand= Brand::where('slug', $slug)->firstOrFail();
         return view('catalog.brand', compact('brand'));
     }
 
-    public function product($slug)
+    public function product(Product $product)
     {
-        $product= Product::where('slug', $slug)->firstOrFail();
-
         return view('catalog.product', compact('product'));
     }
+
+//    public function category($slug)
+//    {
+//        $category= Category::where('slug', $slug)->firstOrFail();
+//        return view('catalog.category', compact('category'));
+//    }
+//
+//    public function brand($slug)
+//    {
+//        $brand= Brand::where('slug', $slug)->firstOrFail();
+//        return view('catalog.brand', compact('brand'));
+//    }
+//
+//    public function product($slug)
+//    {
+//        $product= Product::where('slug', $slug)->firstOrFail();
+//
+//        return view('catalog.product', compact('product'));
+//    }
 }
