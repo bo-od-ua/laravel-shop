@@ -31,9 +31,6 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer('layout.part.roots', function ($view){
             $view->with(['items'=> Category::all()]);
         });
-        View::composer('layout.part.roots', function ($view){
-            $view->with(['items'=> Category::roots()]);
-        });
         View::composer('layout.part.brands', function ($view){
             $view->with(['items'=> Brand::popular()]);
         });

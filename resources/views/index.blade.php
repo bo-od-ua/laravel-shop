@@ -8,4 +8,39 @@
 
     <p>Familiares nostros, credo, Sironem dicis et Philodemum, cum optimos viros, tum homines doctissimos. Uterque enim summo bono fruitur, id est voluptate. Indicant pueri, in quibus ut in speculis natura cernitur. Duarum enim vitarum nobis erunt instituta capienda. Sed tamen omne, quod de re bona dilucide dicitur, mihi praeclare dici videtur. Quamquam in hac divisione rem ipsam prorsus probo, elegantiam desidero. Si alia sentit, inquam, alia loquitur, numquam intellegam quid sentiat; Familiares nostros, credo, Sironem dicis et Philodemum, cum optimos viros, tum homines doctissimos. Quae contraria sunt his, malane? Videamus igitur sententias eorum, tum ad verba redeamus. </p>
 
+    @if($new->count())
+        <h2>Новинки</h2>
+        <div class="row">
+            @foreach($new as $item)
+                @include('catalog.part.product', ['product'=> $item])
+            @endforeach
+        </div>
+    @endif
+
+    @if($new->count())
+        <h2>Лидеры продаж</h2>
+        <div class="row">
+            @foreach($hit as $item)
+                @include('catalog.part.product', ['product'=> $item])
+            @endforeach
+        </div>
+    @endif
+
+    @if($new->count())
+        <h2>Новинки</h2>
+        <div class="row">
+            @foreach($new as $item)
+                @include('catalog.part.product', ['product'=> $item])
+            @endforeach
+        </div>
+    @endif
+
+    @if($new->count())
+        <h2>Распродажа</h2>
+        <div class="row">
+            @foreach($sale as $item)
+                @include('catalog.part.product', ['product'=> $item])
+            @endforeach
+        </div>
+    @endif
 @endsection

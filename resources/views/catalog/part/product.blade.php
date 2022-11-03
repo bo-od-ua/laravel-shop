@@ -3,7 +3,18 @@
         <div class="card-header">
             <h3 class="mb-0">{{ $product->name }}</h3>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body p-0 position-relative">
+            <div class="position-absolute">
+                @if($product->new)
+                    <span class="badge badge-info text-white ml-1">Новинка</span>
+                @endif
+                @if($product->hit)
+                    <span class="badge badge-danger ml-1">Лидер продаж</span>
+                @endif
+                @if($product->sale)
+                    <span class="badge badge-success ml-1">Распродажа</span>
+                @endif
+            </div>
             @if ($product->image)
                 @php($url = url('storage/catalog/product/thumb/' . $product->image))
                 <img src="{{ $url }}" class="img-fluid" alt="">

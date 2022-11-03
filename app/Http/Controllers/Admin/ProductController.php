@@ -8,7 +8,6 @@ use App\Http\Requests\ProductCatalogRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -55,6 +54,11 @@ class ProductController extends Controller
      */
     public function store(ProductCatalogRequest $request)
     {
+        $request->merge([
+            'new'=>  $request->has('new'),
+            'hit'=>  $request->has('hit'),
+            'sale'=> $request->has('sale'),
+        ]);
         $data= $request->all();
         $data['image']= $this->imageSaver->upload($request, null, 'product');
         $product= Product::create($data);
@@ -96,6 +100,11 @@ class ProductController extends Controller
      */
     public function update(ProductCatalogRequest $request, Product $product)
     {
+        $request->merge([
+            'new'=>  $request->has('new'),
+            'hit'=>  $request->has('hit'),
+            'sale'=> $request->has('sale'),
+        ]);
         $data= $request->all();
         $data['image']= $this->imageSaver->upload($request, $product, 'product');
         $product->update($data);
@@ -115,7 +124,7 @@ class ProductController extends Controller
         $this->imageSaver->remove($product, 'product');
         $product->delete();
         return redirect()
-            ->route('admin.category.index')
+            ->route('admin.product.index')
             ->with('success', 'Товар успешно удалён');
     }
 }

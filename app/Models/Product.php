@@ -14,6 +14,9 @@ class Product extends Model
         'content',
         'image',
         'price',
+        'new',
+        'hit',
+        'sale'
     ];
     public function category(){
         return $this->belongsTo(Category::class);

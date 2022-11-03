@@ -9,9 +9,24 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <img src="https://via.placeholder.com/400x400"
-                                 alt="" class="img-fluid">
+                        <div class="col-md-6 position-relative">
+                            <div class="position-absolute">
+                                @if($product->new)
+                                    <span class="badge badge-info text-white ml-1">Новинка</span>
+                                @endif
+                                @if($product->hit)
+                                    <span class="badge badge-danger ml-1">Лидер продаж</span>
+                                @endif
+                                @if($product->sale)
+                                    <span class="badge badge-success ml-1">Распродажа</span>
+                                @endif
+                            </div>
+                            @if($product->image)
+                                @php $url = url('storage/catalog/product/image/' . $product->image) @endphp
+                                <img src="{{ $url }}" alt="" class="img-fluid">
+                            @else
+                                <img src="https://via.placeholder.com/600x300" alt="" class="img-fluid">
+                            @endif
                         </div>
                         <div class="col-md-6">
                             <p>Цена: {{ number_format($product->price, 2, '.', '') }}</p>
@@ -34,29 +49,21 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-md-6">
-                            Категория:
-                            <a href="{{ route('catalog.category', [$product->category->slug]) }}">
-                                {{ $product->category->name }}
-                            </a>
+                            @isset($product->category)
+                                Категория:
+                                <a href="{{ route('catalog.category', ['category' => $product->category->slug]) }}">
+                                    {{ $product->category->name }}
+                                </a>
+                            @endisset
                         </div>
                         <div class="col-md-6 text-right">
-                            Бренд:
-                            <a href="{{ route('catalog.brand', [$product->brand->slug]) }}">
-                                {{ $product->brand->name }}
-                            </a>
+                            @isset($product->brand)
+                                Бренд:
+                                <a href="{{ route('catalog.brand', ['brand' => $product->brand->slug]) }}">
+                                    {{ $product->brand->name }}
+                                </a>
+                            @endisset
                         </div>
-{{--                        <div class="col-md-6">
-                            Категория:
-                            <a href="{{ route('catalog.category', ['slug' => $product->category->slug]) }}">
-                                {{ $product->category->name }}
-                            </a>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            Бренд:
-                            <a href="{{ route('catalog.brand', ['slug' => $product->brand->slug]) }}">
-                                {{ $product->brand->name }}
-                            </a>
-                        </div> --}}
                     </div>
                 </div>
             </div>
