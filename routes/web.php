@@ -59,8 +59,8 @@ Route::group([
 ], function (){
     Route::get('index', 'UserController@index')->name('index');
     Route::resource('profile', 'ProfileController');
-//    Route::get('order', 'OrderController@index')->name('order.index');
-//    Route::get('order/{order}', 'OrderController@show')->name('order.show');
+    Route::get('order', 'OrderController@index')->name('order.index');
+    Route::get('order/{order}', 'OrderController@show')->name('order.show');
 });
 
 Route::group([
