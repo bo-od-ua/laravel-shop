@@ -34,7 +34,7 @@ class Category extends Model
         return ! in_array($id, $ids);
     }
 
-    public function getAllChildren($id){
+    public static function getAllChildren($id){
         $children= self::where('parent_id', $id)->with('children')->get();
         $ids= [];
 
@@ -42,7 +42,7 @@ class Category extends Model
             $ids[]= $child->id;
 
             if($child->children->count()){
-                $ids= array_merge($ids, $this->getAllChildren($child->id));
+                $ids= array_merge($ids, self::getAllChildren($child->id));
             }
         }
 
