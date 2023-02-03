@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Cookie;
 
-class BasketController extends Controller
+class BasketController extends Controller    //
 {
     private $basket;
 
